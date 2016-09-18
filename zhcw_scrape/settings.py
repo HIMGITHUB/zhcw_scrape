@@ -14,7 +14,17 @@ BOT_NAME = 'zhcw_scrape'
 SPIDER_MODULES = ['zhcw_scrape.spiders']
 NEWSPIDER_MODULE = 'zhcw_scrape.spiders'
 
+# FEED_URI = './output/scrape_brief.csv'
+# FEED_FORMAT = 'CSV'
 
+
+
+
+WEBKIT_DOWNLOADER = ['zhcw_spider']
+DOWNLOADER_MIDDLEWARES = {
+  # 'JsSpider.middleware.rotate_useragent.RotateUserAgentMiddleware': 533,
+    'zhcw_scrape.webkit_js.WebkitDownloader': 543,
+}
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'zhcw_scrape (+http://www.yourdomain.com)'
 
@@ -61,9 +71,19 @@ NEWSPIDER_MODULE = 'zhcw_scrape.spiders'
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'zhcw_scrape.pipelines.SomePipeline': 300,
-#}
+
+
+DB_HOST = 'localhost'
+DB_PORT = 3306
+DB_USER = 'zhcw'
+DB_PASSWD = 'zhcw'
+DB_DB = 'zhcwDB'
+
+
+
+ITEM_PIPELINES = {
+   'zhcw_scrape.pipelines.ZhcwScrapePipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
